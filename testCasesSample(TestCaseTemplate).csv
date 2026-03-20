@@ -1,0 +1,32 @@
+﻿Test Case Template,,,,,,,,,
+TestCaseId,Component,Priority,Description/Test Summary,Pre-requisites,Test Steps,Expected Result,Actual Result,Status,Test Executed By
+UT_01,Unit(Encryption),P0,Verify encryption method produces a unique hash,System environment is on and initialized,"1. Pass String ""Ticket_1"" to encryption function
+2. Observe return value
+",Returns a unique and encrypted 256 bit string,,,Jasper_Mc
+UT_02,Unit(SeatLogic),P1,Verify isSeatAvailable returns false for taken seats,Database has seat A1 marked as taken,"1. Call isSeatAvailable(""A1"")
+2. check boolean return value
+",Returns a unique and encrypted 256 bit string,,,Jasper_Mc
+UT_03,Unit(QR),P1,Verify QR code generation from valid userID,valid 256 bit hash string being available,"1. Input has into generateQR()
+2. Verify output object type
+",A valid QR code image is generated,,,Jasper_Mc
+FT_01,Functional(UI),P0,Verify seat color changes to red upon user selection,User is on interactive seat selection map,"1. Click on an available seat
+2. User observes UI changes
+",The seat icon turns red and is added to the cart,,,Jasper_Mc
+FT_02,Functional(Payment),P0,"Verify ""Add to Wallet"" triggers API call",User completed a successfull ticket transaction,"1. Click ""Add to Wallet""
+2. Monitor network traffic
+",System calls a third party digital wallet API,,,Jasper_Mc
+FT_03,Functional(Authentication),P1,Verify system denies access for incorrect passwords,Registered account already exists,"1. Enter valid email but incorrect password
+2. Click login button
+","System displays ""Invalid Username/ Password and denies user access",,,Jasper_Mc
+ST_01,System(End to End),P0,User Ticket flow,System is online and movies are available,"1. Select Movie
+2. Select seat
+3. Process Payment ",User receives email with digtal stub and QR code,,,Jasper_Mc
+ST_02,System(Validation),P0,Employee Ticket Scanning flow,User has Digital Stub on phone screen,"1. Open portal
+2. Scan user QR code
+3. Check status ","Portal shows ""Valid Ticket""   and marks user ticket as validated",,,Jasper_Mc
+ST_03,System(Security),P1,Verify system denies access to duplicate tickets,User ticket has been scanned for entry,"1. Present pre-used QR code
+2. Scan user QR code
+","Portal shows ""Ticket Already Used"" and plays negative noise",,,Jasper_Mc
+ST_04,System(Sync),P2,Verify ticket availability synced across customers,Two users view the same showtime,"1. First user buys a ticket
+2. Second user refreshes seat selection map
+","Second user sees first users seat get updated to ""Taken"" and turn red",,,Jasper_Mc
